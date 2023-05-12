@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
 import './App.css';
 
+function ResultItem({ result }) {
+  return (
+    <li>{result}</li>
+  );
+}
+
 function App() {
   const [num1, setNum1] = useState(0);
   const [num2, setNum2] = useState(0);
   const [result, setResult] = useState(0);
+  const [history, setHistory] = useState([]);
 
   const handleNum1Change = (event) => {
     setNum1(Number(event.target.value));
@@ -15,19 +22,27 @@ function App() {
   };
 
   const handleAddition = () => {
-    setResult(num1 + num2);
+    const newResult = num1 + num2;
+    setResult(newResult);
+    setHistory([...history, newResult]);
   };
 
   const handleSubtraction = () => {
-    setResult(num1 - num2);
+    const newResult = num1 - num2;
+    setResult(newResult);
+    setHistory([...history, newResult]);
   };
 
   const handleMultiplication = () => {
-    setResult(num1 * num2);
+    const newResult = num1 * num2;
+    setResult(newResult);
+    setHistory([...history, newResult]);
   };
 
   const handleDivision = () => {
-    setResult(num1 / num2);
+    const newResult = num1 / num2;
+    setResult(newResult);
+    setHistory([...history, newResult]);
   };
 
   return (
@@ -49,6 +64,14 @@ function App() {
       </div>
       <div>
         <p>Resultado: {result}</p>
+      </div>
+      <div>
+        <h2>Histórico de Resultados</h2>
+        <ul>
+          {history.map((result, index) => (
+            <ResultItem key={index} result={result} />
+          ))}
+        </ul>
       </div>
     </div>
   );
